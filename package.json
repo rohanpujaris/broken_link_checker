@@ -1,0 +1,17 @@
+{
+  "name": "brokenlinkchecked",
+  "description": "brokenlinkchecked",
+  "version": "1.0.0",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "serverless-ruby-layer": "^1.5.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

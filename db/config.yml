@@ -1,0 +1,17 @@
+development:
+  adapter: postgresql
+  url: broken_link_checker_dev
+  pool: 5
+  timeout: 5000
+
+production:
+  adapter: postgresql
+  url: <%= ENV['DATABASE_URL'] %>
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: postgresql
+  database: broken_link_checker_test
+  pool: 5
+  timeout: 5000

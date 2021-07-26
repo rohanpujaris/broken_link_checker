@@ -1,0 +1,62 @@
+service: brokenlinkservice
+frameworkVersion: '2'
+configValidationMode: off
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: ruby2.7
+  lambdaHashingVersion: 20201221
+
+functions:
+  broken_link_batcher:
+    handler: handler.broken_link_batcher
+    events:
+      - schedule: rate(1 day)
+    environment:
+      SQS_URL: { Ref: BrokenLinkCheckerSQS }
+      BATCH_SIZE: 100
+      DATABASE_URL: 'db_url'
+  broken_link_batch_executor:
+    handler: handler.broken_link_batch_executor
+    events:
+      - http:
+          path: /
+          method: post
+          cors: true
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - BrokenLinkCheckerSQS
+              - Arn
+    environment:
+      THREAD_COUNT: 12
+      DATABASE_URL: 'db_url'
+plugins:
+  - serverless-ruby-layer
+package:
+  patterns:
+    - handler.rb
+    - lib/**
+
+custom:
+  rubyLayer:
+    use_docker: true
+    docker_yums:
+      - postgresql-devel
+    native_libs:
+      - /usr/lib64/libpq.so.5
+      - /usr/lib64/libldap_r-2.4.so.2
+      - /usr/lib64/liblber-2.4.so.2
+      - /usr/lib64/libsasl2.so.3
+      - /usr/lib64/libssl3.so
+      - /usr/lib64/libsmime3.so
+      - /usr/lib64/libnss3.so
+
+resources:
+  Resources:
+    BrokenLinkCheckerSQS:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: ${opt:stage}BrokenLinkCheckerSQS
+
