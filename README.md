@@ -25,7 +25,7 @@
         ./bin/console
     ```
 
-# Deploying to aws lambda using serverless
+# Deploying to aws lambda using serverless framework
 
 - ### Install npm packages
     ```
@@ -54,7 +54,7 @@
 # Question
 
 - Thoughts on why you chose the language you did?
-  I used Ruby as I am most comfortable in it. If I would have chosen another language it would have taken more effort to implement it. In real app case decision would have been made keeping scaling and team size in mind.
+  - I used Ruby as I am most comfortable in it. If I would have chosen another language it would have taken more effort to implement it. In real app case decision would have been made keeping scaling and team size in mind.
 - How you would run the script in production.
   There are two lambda functions
    1. broken_link_batcher: Triggered by Amazon CloudWatch Events every day. Its job is to divide Items into batches and put id's of each batch item as a separate AWS SQS message
