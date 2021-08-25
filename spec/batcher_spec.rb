@@ -8,10 +8,13 @@ describe Batcher do
     allow(ENV).to receive(:[])
     allow(ENV).to receive(:[]).with('ENV').and_return('production')
     allow(ENV).to receive(:[]).with('SQS_URL').and_return(queue_url)
-    expect_any_instance_of(Aws::SQS::Client).to receive(:send_message).with(
-      queue_url: ENV['SQS_URL'],
+    sqs_client = double(send_message: -> {})
+    expect(::Aws::SQS::Client).to receive(:new).and_return(sqs_client)
+    expect(sqs_client).to receive(:send_message).with({
+      queue_url: queue_url,
       message_body: [item.id]
-    )
+    })
+
     described_class.run
   end
 

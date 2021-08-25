@@ -11,9 +11,9 @@
 - ### Create and fill database with seed data
     Setup db/config.yml with postgress configuration details
     ```
-    rake db:create
-    rake db:migrate
-    rake db:seed
+    bundle exec rake db:create
+    bundle exec rake db:migrate
+    bundle exec rake db:seed
     ```
 - ### Running rake task to check broken link
     ```
@@ -42,6 +42,7 @@
 
 # Running test
     ```
+    ENV=development bundle exec rake db:migrate
     bundle exec rspec spec
     ```
 

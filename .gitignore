@@ -56,3 +56,4 @@ build-iPhoneSimulator/
 node_modules
 
 .byebug_history
+bundle

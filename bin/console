@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+ENV['ENV'] ||= 'development'
+
 require 'bundler/setup'
 require 'dotenv/load'
 require 'irb'
@@ -11,8 +13,6 @@ require_relative '../handler'
 # (If you use this, don't forget to add pry to your Gemfile!)
 # require "pry"
 # Pry.start
-
-ENV['ENV'] ||= 'development'
 
 Dir["./lib/**/*.rb"].each {|file| require file }
 def reload!
