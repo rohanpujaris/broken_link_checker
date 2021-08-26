@@ -20,7 +20,7 @@ class LinkChecker
         Response::Know.new(response)
       end
     rescue StandardError => e
-      Response::Unkow.new(e)
+      Response::Unknown.new(e)
     end
   end
 end
