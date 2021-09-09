@@ -13,7 +13,7 @@ module Response
       response.code
     end
 
-    def know?
+    def known?
       true
     end
 

@@ -6,7 +6,7 @@ module Response
       @response = response
     end
 
-    def know?
+    def known?
       raise "Define method 'know' in class #{self.class.name}"
     end
 

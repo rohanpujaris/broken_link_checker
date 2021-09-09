@@ -1,12 +1,12 @@
 require_relative './base'
 
 module Response
-  class Unkow < Base
+  class Unknown < Base
     def code
       nil
     end
 
-    def know?
+    def known?
       false
     end
 
